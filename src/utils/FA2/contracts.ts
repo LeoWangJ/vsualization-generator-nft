@@ -1,10 +1,8 @@
 import type { CollectionMeta } from "./type";
-import { PollingSubscribeProvider, TezosToolkit } from '@taquito/taquito'
+import { PollingSubscribeProvider, TezosToolkit, ContractAbstraction, ContractProvider } from '@taquito/taquito'
 import { InMemorySigner } from '@taquito/signer'
-import { originateContract } from '@oxheadalpha/tezos-tools'
 import axios from 'axios'
 import { contractStorage, mintFreezeStorage, nftStorage, pausableSimpleAdminStorage } from '@oxheadalpha/fa2-interfaces';
-
 
 export const createNftStorage = (owner: string, metadata: CollectionMeta) => {
     return contractStorage
@@ -48,4 +46,22 @@ export function createToolkitWithoutSigner(): TezosToolkit {
         })
     );
     return toolkit;
+}
+
+
+export const originateContract = async (
+    tz: TezosToolkit,
+    code: string,
+    storage: string | object,
+    name: string
+): Promise<ContractAbstraction<ContractProvider>> => {
+    try {
+        const origParam = typeof storage === 'string' ? { code, init: storage } : { code, storage };
+        const originationOp = await tz.contract.originate(origParam);
+        const contract = await originationOp.contract()
+        return Promise.resolve(contract);
+    } catch (error) {
+        const jsonError = JSON.stringify(error, null, 2);
+        return Promise.reject(error);
+    }
 }
