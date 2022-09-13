@@ -5,6 +5,7 @@ specifiers:
   '@oxheadalpha/tezos-tools': ^7.0.0
   '@taquito/signer': ^14.0.0
   '@taquito/taquito': ^14.0.0
+  '@temple-wallet/dapp': ^7.0.0
   '@vitejs/plugin-vue': ^3.1.0
   axios: ^0.27.2
   typescript: ^4.6.4
@@ -17,6 +18,7 @@ dependencies:
   '@oxheadalpha/tezos-tools': 7.0.0
   '@taquito/signer': 14.0.0
   '@taquito/taquito': 14.0.0
+  '@temple-wallet/dapp': 7.0.0_@taquito+taquito@14.0.0
   axios: 0.27.2
   vue: 3.2.39
 
@@ -404,6 +406,15 @@ packages:
       buffer: 6.0.3
       elliptic: 6.5.4
       typedarray-to-buffer: 4.0.0
+    dev: false
+
+  /@temple-wallet/dapp/7.0.0_@taquito+taquito@14.0.0:
+    resolution: {integrity: sha512-JbpXompkVDh4Wl0Oa+i8iKEGinFqYPTM4uuqw8eBH57vHxq52W5K3NSgVaKjfyWms9UYQ8xOfsUOzzUVWSYtxA==}
+    peerDependencies:
+      '@taquito/taquito': ^12.0.0
+    dependencies:
+      '@taquito/taquito': 14.0.0
+      nanoid: 3.3.4
     dev: false
 
   /@types/bs58check/2.1.0:

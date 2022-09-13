@@ -3,8 +3,9 @@ import { PollingSubscribeProvider, TezosToolkit, ContractAbstraction, ContractPr
 import { InMemorySigner } from '@taquito/signer'
 import axios from 'axios'
 import { contractStorage, mintFreezeStorage, nftStorage, pausableSimpleAdminStorage } from '@oxheadalpha/fa2-interfaces';
+import { TempleWallet } from "@temple-wallet/dapp";
 
-export const createNftStorage = (owner: string, metadata: CollectionMeta) => {
+export const createNftStorage = (owner: string, metadata: string) => {
     return contractStorage
         .with(pausableSimpleAdminStorage)
         .with(nftStorage)
@@ -12,52 +13,24 @@ export const createNftStorage = (owner: string, metadata: CollectionMeta) => {
         .build({ owner, metadata })
 }
 
-export async function createCollection(owner: string, metadata: CollectionMeta): Promise<void> {
-    const tz = await createToolkit(owner);
-    const ownerAddress = await tz.signer.publicKeyHash();
-
-    const { data: code } = await axios.get('src/assets/fa2_nft_asset.tz')
-    const storage = createNftStorage(ownerAddress, metadata)
-    const contract = await originateContract(tz, code, storage, 'nft')
-}
-
-export async function createToolkit(
-    privateKey: string
-): Promise<TezosToolkit> {
-    const signer = await InMemorySigner.fromSecretKey(privateKey).catch(_ => console.log(`fail to get signer`))
-    return createToolkitFromSigner(signer as unknown as InMemorySigner);
-}
-
-export function createToolkitFromSigner(
-    signer: InMemorySigner
-): TezosToolkit {
-    const toolkit = createToolkitWithoutSigner();
-    toolkit.setProvider({
-        signer
-    });
-    return toolkit;
-}
-
-export function createToolkitWithoutSigner(): TezosToolkit {
-    const toolkit = new TezosToolkit("https://rpc.ghostnet.teztnets.xyz")
-    toolkit.setStreamProvider(
-        toolkit.getFactory(PollingSubscribeProvider)({
-            pollingIntervalMilliseconds: 5000
-        })
-    );
-    return toolkit;
+export async function createCollection(wallet: TezosToolkit,address:string,  metadata: CollectionMeta): Promise<void> {
+     const { data: code } = await axios.get('src/assets/fa2_nft_asset.tz')
+    const storage = createNftStorage(address, JSON.stringify(metadata))
+    const contract = await originateContract(wallet, code, storage)
+    console.log(contract)
 }
 
 
 export const originateContract = async (
     tz: TezosToolkit,
     code: string,
-    storage: string | object,
-    name: string
+    storage: string | object
 ): Promise<ContractAbstraction<ContractProvider>> => {
     try {
         const origParam = typeof storage === 'string' ? { code, init: storage } : { code, storage };
+        console.log(origParam)
         const originationOp = await tz.contract.originate(origParam);
+        console.log(originationOp)
         const contract = await originationOp.contract()
         return Promise.resolve(contract);
     } catch (error) {
