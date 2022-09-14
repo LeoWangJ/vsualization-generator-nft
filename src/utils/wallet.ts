@@ -5,8 +5,8 @@ import { NETWORK, RPC_URL } from './constants';
 export async function connect() {
   try {
     const mywallet = new TempleWallet('vsualization-generator-nft')
-    if(mywallet.permission === null){
-      await mywallet.connect({name: NETWORK.testnet,rpc:RPC_URL.testnet} as TempleDAppNetwork)
+    if (mywallet.permission === null) {
+      await mywallet.connect({ name: NETWORK.testnet, rpc: RPC_URL.testnet } as TempleDAppNetwork)
     }
     return mywallet
   } catch (err) {
@@ -14,7 +14,7 @@ export async function connect() {
   }
 }
 
-export async function getSigner (wallet:TempleWallet) {
+export async function getSigner(wallet: TempleWallet) {
   const Tezos = await wallet.toTezos()
   Tezos.setProvider({ wallet })
   return {
@@ -26,9 +26,9 @@ export async function getSigner (wallet:TempleWallet) {
 export function createToolkitWithoutSigner(): TezosToolkit {
   const toolkit = new TezosToolkit(RPC_URL.testnet)
   toolkit.setStreamProvider(
-      toolkit.getFactory(PollingSubscribeProvider)({
-          pollingIntervalMilliseconds: 5000
-      })
+    toolkit.getFactory(PollingSubscribeProvider)({
+      pollingIntervalMilliseconds: 5000
+    })
   );
   return toolkit;
 }

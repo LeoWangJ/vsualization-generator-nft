@@ -4,33 +4,8 @@ import { createCollection } from './utils/FA2/contracts'
 import { connect, getSigner } from './utils/wallet'
 onMounted(async () => {
   const wallet = await connect()
-  if(wallet){
-    const {address,walletInstance } = await getSigner(wallet)
-    console.log(address,walletInstance)
-    const testmeta = {
-  "name": "leowang",
-  "description": "Awesome NFT collection",
-  "homepage": "https://github.com/oxheadalpha/nft-tutorial",
-  "authors": [
-    "John Doe <john.doe@johndoe.com>"
-  ],
-  "version": "1.0.0",
-  "license": {
-    "name": "MIT"
-  },
-  "interfaces": [
-    "TZIP-016",
-    "TZIP-012",
-    "TZIP-021"
-  ],
-  "source": {
-    "tools": [
-      "LIGO"
-    ],
-    "location": "https://github.com/oxheadalpha/nft-tutorial"
-  }
-}
-    createCollection(walletInstance,address,testmeta)
+  if (wallet) {
+    const { address, walletInstance } = await getSigner(wallet)
   }
 })
 </script>
