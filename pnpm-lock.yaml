@@ -3,6 +3,7 @@ lockfileVersion: 5.4
 specifiers:
   '@oxheadalpha/fa2-interfaces': ^7.0.0
   '@oxheadalpha/tezos-tools': ^7.0.0
+  '@pinata/sdk': ^1.1.26
   '@taquito/signer': 13.0.1
   '@taquito/taquito': 13.0.1
   '@temple-wallet/dapp': ^7.0.0
@@ -22,6 +23,7 @@ specifiers:
 dependencies:
   '@oxheadalpha/fa2-interfaces': 7.0.0
   '@oxheadalpha/tezos-tools': 7.0.0
+  '@pinata/sdk': 1.1.26
   '@taquito/signer': 13.0.1
   '@taquito/taquito': 13.0.1
   '@temple-wallet/dapp': 7.0.0_@taquito+taquito@13.0.1

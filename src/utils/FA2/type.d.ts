@@ -1,3 +1,6 @@
+import { TezosToolkit } from "@taquito/taquito"
+import * as fa2 from '@oxheadalpha/fa2-interfaces'
+
 export interface CollectionMeta {
     name: string
     description: string
@@ -18,4 +21,22 @@ export interface NFTMeta {
     tags: string[]
     minterAddress: string
     artifactUri: string
+}
+
+export interface PinIPFS {
+    apiKey: string,
+    secretKey: string,
+    name: string,
+    metadata: NFTMeta
+}
+
+export interface Token {
+    tokenId: number
+    metadataUri: string
+}
+export interface MintNFT {
+    wallet: TezosToolkit
+    address: string
+    collectionAddress: string
+    tokens: Token[]
 }

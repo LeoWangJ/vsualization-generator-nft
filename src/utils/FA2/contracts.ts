@@ -1,7 +1,8 @@
-import type { CollectionMeta } from "./type";
+import type { CollectionMeta, MintNFT, Token } from "./type";
 import { TezosToolkit, DefaultWalletType } from '@taquito/taquito'
 import axios from 'axios'
 import { contractStorage, mintFreezeStorage, nftStorage, pausableSimpleAdminStorage } from '@oxheadalpha/fa2-interfaces'
+import * as fa2 from '@oxheadalpha/fa2-interfaces'
 
 export const createNftStorage = (owner: string, metadata: string) => {
     return contractStorage.with(pausableSimpleAdminStorage).with(nftStorage).with(mintFreezeStorage).build({ owner, metadata })
@@ -20,6 +21,15 @@ export async function createCollection(wallet: TezosToolkit, address: string, me
 }
 
 
+export const mintNfts = async ({ wallet, address, collectionAddress, tokens }: MintNFT): Promise<void> => {
+    const nftContract = (await fa2.tezosWalletApi(wallet).at(collectionAddress)).asNft().withMint()
+    const parsedTokens = parseTokens(tokens)
+    await fa2.runMethod(nftContract.mint([{ owner: address, tokens: parsedTokens }]))
+}
+
+const parseTokens = (tokens: Token[]): fa2.TokenMetadataInternal[] => {
+
+}
 export const originateContract = async (tz: TezosToolkit, code: string, storage: string | object): Promise<DefaultWalletType> => {
     try {
         const origParam = typeof storage === 'string' ? { code, init: storage } : { code, storage };
