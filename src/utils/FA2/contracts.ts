@@ -38,6 +38,11 @@ const parseTokens = (token: Token): fa2.TokenMetadataInternal => {
     return parseToken
 }
 
+export const mintFreeze = async (wallet: TezosToolkit, collectionAddress: string): Promise<void> => {
+    const nftContract = (await fa2.tezosApi(wallet).at(collectionAddress)).asNft().withMint().withFreeze()
+    await fa2.runMethod(nftContract.mintFreeze())
+}
+
 export const originateContract = async (tz: TezosToolkit, code: string, storage: string | object): Promise<DefaultWalletType> => {
     try {
         const origParam = typeof storage === 'string' ? { code, init: storage } : { code, storage };
