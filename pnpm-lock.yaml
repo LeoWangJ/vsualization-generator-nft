@@ -6,9 +6,11 @@ specifiers:
   '@pinata/sdk': ^1.1.26
   '@taquito/signer': 13.0.1
   '@taquito/taquito': 13.0.1
+  '@taquito/utils': ^14.0.0
   '@temple-wallet/dapp': ^7.0.0
   '@vitejs/plugin-vue': ^3.1.0
   axios: ^0.27.2
+  bignumber.js: ^9.1.0
   buffer: ^6.0.3
   element-plus: ^2.2.16
   typescript: ^4.6.4
@@ -26,8 +28,10 @@ dependencies:
   '@pinata/sdk': 1.1.26
   '@taquito/signer': 13.0.1
   '@taquito/taquito': 13.0.1
+  '@taquito/utils': 14.0.0
   '@temple-wallet/dapp': 7.0.0_@taquito+taquito@13.0.1
   axios: 0.27.2
+  bignumber.js: 9.1.0
   buffer: 6.0.3
   element-plus: 2.2.16_vue@3.2.39
   vite-compatible-readable-stream: 3.6.1
@@ -398,6 +402,21 @@ packages:
       '@stablelib/blake2b': 1.0.1
       '@stablelib/ed25519': 1.0.3
       '@types/bs58check': 2.1.0
+      blakejs: 1.2.1
+      bs58check: 2.1.2
+      buffer: 6.0.3
+      elliptic: 6.5.4
+      typedarray-to-buffer: 4.0.0
+    dev: false
+
+  /@taquito/utils/14.0.0:
+    resolution: {integrity: sha512-0RSHn/CzbcbMdldJJIlXyxOvAajwmL6iPKJ6NaRyYJqqLM2CxYjG72KpXVv716pCMV1MbIWsOAr9FKbxW73PsA==}
+    engines: {node: '>=6.0.0'}
+    dependencies:
+      '@stablelib/blake2b': 1.0.1
+      '@stablelib/ed25519': 1.0.3
+      '@types/bs58check': 2.1.0
+      bignumber.js: 9.1.0
       blakejs: 1.2.1
       bs58check: 2.1.2
       buffer: 6.0.3
