@@ -1,5 +1,5 @@
-import { validateTzip16, validateTzip21 } from '@oxheadalpha/fa2-interfaces';
-import type { CollectionMeta, NFTMeta } from './type';
+import { validateTzip16, validateTzip21 } from '@oxheadalpha/fa2-interfaces'
+import type { CollectionMeta, NFTMeta } from './type'
 
 
 

@@ -1,4 +1,4 @@
-import type { CollectionMeta, MintNFT, Token } from "./type";
+import type { Balance, CollectionMeta, MintNFT, ShowBalance, Token } from "./type"
 import { TezosToolkit, DefaultWalletType } from '@taquito/taquito'
 import axios from 'axios'
 import { contractStorage, mintFreezeStorage, nftStorage, pausableSimpleAdminStorage } from '@oxheadalpha/fa2-interfaces'
@@ -33,8 +33,8 @@ const parseTokens = (token: Token): fa2.TokenMetadataInternal => {
     const parseToken = fa2.createOffChainTokenMetadata(
         new BigNumber(token.tokenId),
         token.metadataUri
-    );
-    parseToken.token_info.set('', char2Bytes(token.metadataUri));
+    )
+    parseToken.token_info.set('', char2Bytes(token.metadataUri))
     return parseToken
 }
 
@@ -45,11 +45,30 @@ export const mintFreeze = async (wallet: TezosToolkit, collectionAddress: string
 
 export const originateContract = async (tz: TezosToolkit, code: string, storage: string | object): Promise<DefaultWalletType> => {
     try {
-        const origParam = typeof storage === 'string' ? { code, init: storage } : { code, storage };
+        const origParam = typeof storage === 'string' ? { code, init: storage } : { code, storage }
         const originationOp = await tz.wallet.originate(origParam).send()
         const contract = originationOp.contract()
-        return Promise.resolve(contract);
+        return Promise.resolve(contract)
     } catch (error) {
-        return Promise.reject(error);
+        return Promise.reject(error)
     }
+}
+
+export const showBalances = async ({ tz, ownerAddress, nftAddress, tokens }: ShowBalance): Promise<Balance[]> => {
+    const requests: fa2.BalanceRequest[] = tokens.map(t => {
+        return { token_id: new BigNumber(t), owner: ownerAddress }
+    })
+    const fa2Contract = (await fa2.tezosApi(tz).at(nftAddress)).withFa2()
+    const balances = await fa2Contract.queryBalances(requests)
+    return parseBalances(balances)
+}
+
+const parseBalances = (balances: fa2.BalanceResponse[]): Balance[] => {
+    return balances.map(balance => {
+        return {
+            owner: balance.request.owner,
+            tokenId: balance.request.token_id.toString(),
+            balance: balance.balance.toString()
+        }
+    })
 }

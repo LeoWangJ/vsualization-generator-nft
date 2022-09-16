@@ -1,5 +1,5 @@
 import pinataSDK from '@pinata/sdk'
-import type { PinIPFS } from './type';
+import type { PinIPFS } from './type'
 
 
 export async function pinFile({ apiKey, secretKey, name, metadata }: PinIPFS): Promise<string> {

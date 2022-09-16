@@ -1,6 +1,6 @@
-import { PollingSubscribeProvider, TezosToolkit } from '@taquito/taquito';
+import { PollingSubscribeProvider, TezosToolkit } from '@taquito/taquito'
 import { TempleDAppNetwork, TempleWallet } from '@temple-wallet/dapp'
-import { NETWORK, RPC_URL } from './constants';
+import { NETWORK, RPC_URL } from './constants'
 
 export async function connect() {
   try {
@@ -10,7 +10,7 @@ export async function connect() {
     }
     return mywallet
   } catch (err) {
-    console.log(`connect error:`, err);
+    console.log(`connect error:`, err)
   }
 }
 
@@ -29,6 +29,6 @@ export function createToolkitWithoutSigner(): TezosToolkit {
     toolkit.getFactory(PollingSubscribeProvider)({
       pollingIntervalMilliseconds: 5000
     })
-  );
-  return toolkit;
+  )
+  return toolkit
 }

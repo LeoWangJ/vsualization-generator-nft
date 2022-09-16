@@ -40,3 +40,17 @@ export interface MintNFT {
     collectionAddress: string
     tokens: Token[]
 }
+
+
+export interface Balance {
+    owner: string
+    tokenId: string
+    balance: string
+}
+
+export interface ShowBalance {
+    tz: TezosToolkit
+    ownerAddress: string
+    nftAddress: string
+    tokens: string[]
+}
