@@ -1,5 +1,7 @@
 import { validateTzip16, validateTzip21 } from '@oxheadalpha/fa2-interfaces'
+import { TezosToolkit } from '@taquito/taquito'
 import type { CollectionMeta, NFTMeta } from './type'
+import * as fa2 from '@oxheadalpha/fa2-interfaces'
 
 
 
@@ -45,3 +47,10 @@ export const createNFTMeta = ({ name, description = '', tags = [], minterAddress
 export const validateNFTMeta = (meta) => {
     return validateTzip21(meta)
 }
+
+export const showNFTMetadata = async (tz: TezosToolkit, nftAddress: string, tokens: string[]) => {
+    const tokenIds = tokens.map(t => Number.parseInt(t))
+    const fa2Contract = (await fa2.tezosApi(tz).at(nftAddress)).withFa2()
+    const tokensMeta = await fa2Contract.tokensMetadata(tokenIds)
+    return tokensMeta
+} 

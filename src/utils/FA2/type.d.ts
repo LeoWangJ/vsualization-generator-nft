@@ -44,8 +44,8 @@ export interface MintNFT {
 
 export interface Balance {
     owner: string
-    tokenId: string
-    balance: string
+    tokenId: number
+    balance: number
 }
 
 export interface ShowBalance {

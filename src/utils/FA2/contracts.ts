@@ -67,8 +67,8 @@ const parseBalances = (balances: fa2.BalanceResponse[]): Balance[] => {
     return balances.map(balance => {
         return {
             owner: balance.request.owner,
-            tokenId: balance.request.token_id.toString(),
-            balance: balance.balance.toString()
+            tokenId: +balance.request.token_id.toString(),
+            balance: +balance.balance.toString()
         }
     })
 }
