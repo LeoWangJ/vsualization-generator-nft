@@ -15,7 +15,7 @@ export interface CollectionMeta {
     }
 }
 
-export interface NFTMeta {
+export interface CreateNFTMeta {
     name: string
     description: string
     tags: string[]
@@ -23,10 +23,25 @@ export interface NFTMeta {
     artifactUri: string
 }
 
+export interface NFTMeta {
+    decimals: number
+    isBooleanAmount: boolean
+    name: string
+    description: string
+    tags: string[]
+    minter: string
+    artifactUri: string
+    displayUri: string
+    thumbnailUri: string
+    creators: string[]
+    rights: string
+    attributes: { name: string, value: string }[]
+}
+
 export interface PinIPFS {
-    apiKey: string,
-    secretKey: string,
-    name: string,
+    apiKey: string
+    secretKey: string
+    name: string
     metadata: NFTMeta
 }
 

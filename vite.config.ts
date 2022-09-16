@@ -16,6 +16,9 @@ export default defineConfig({
       resolvers: [ElementPlusResolver()],
     })
   ],
+  define: {
+    'process.env': {}
+  },
   resolve: {
     alias: {
       '@': resolve(__dirname, 'src'),

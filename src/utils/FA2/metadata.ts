@@ -1,6 +1,6 @@
 import { validateTzip16, validateTzip21 } from '@oxheadalpha/fa2-interfaces'
 import { TezosToolkit } from '@taquito/taquito'
-import type { CollectionMeta, NFTMeta } from './type'
+import type { CollectionMeta, CreateNFTMeta, NFTMeta } from './type'
 import * as fa2 from '@oxheadalpha/fa2-interfaces'
 
 
@@ -16,17 +16,17 @@ export const createCollectionMeta = ({ name, description, homepage, authors = []
         interfaces: ['TZIP-016', 'TZIP-012', 'TZIP-021'],
         source: {
             tools: ['LIGO'],
-            location: 'https://github.com/oxheadalpha/nft-tutorial'
+            location: 'https://github.com/LeoWangJ/vsualization-generator-nft'
         }
     }
     return meta
 }
 
-export const validateCollectionMeta = (meta) => {
+export const validateCollectionMeta = (meta: NFTMeta) => {
     return validateTzip16(meta)
 }
 
-export const createNFTMeta = ({ name, description = '', tags = [], minterAddress, artifactUri }: NFTMeta) => {
+export const createNFTMeta = ({ name, description = '', tags = [], minterAddress, artifactUri }: CreateNFTMeta): NFTMeta => {
     const meta = {
         decimals: 0,
         isBooleanAmount: true,
@@ -44,7 +44,7 @@ export const createNFTMeta = ({ name, description = '', tags = [], minterAddress
     return meta
 }
 
-export const validateNFTMeta = (meta) => {
+export const validateNFTMeta = (meta: NFTMeta) => {
     return validateTzip21(meta)
 }
 

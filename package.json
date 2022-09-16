@@ -20,6 +20,7 @@
     "bignumber.js": "^9.1.0",
     "buffer": "^6.0.3",
     "element-plus": "^2.2.16",
+    "util": "^0.12.4",
     "vite-compatible-readable-stream": "^3.6.1",
     "vue": "^3.2.37",
     "vue-router": "4"
