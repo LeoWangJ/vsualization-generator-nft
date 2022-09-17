@@ -5,12 +5,12 @@ import * as fa2 from '@oxheadalpha/fa2-interfaces'
 
 
 
-export const createCollectionMeta = ({ name, description, homepage, authors = [], version = '1.0.0', licenseName = 'MIT' }: CollectionMeta) => {
+export const createCollectionMeta = ({ name, description, homepage, author = '', version = '1.0.0', licenseName = 'MIT' }: CollectionMeta) => {
     const meta = {
         name,
         description,
         homepage,
-        authors,
+        authors: author ? [author]: [],
         version,
         license: { name: licenseName },
         interfaces: ['TZIP-016', 'TZIP-012', 'TZIP-021'],

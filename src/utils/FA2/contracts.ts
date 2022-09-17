@@ -18,7 +18,7 @@ export async function createCollection(wallet: TezosToolkit, address: string, me
         console.log(`createCollection:`, contract)
         return contract.address
     } catch (e) {
-        return `create collection contract error!`
+        return `create collection contract error`
     }
 }
 
