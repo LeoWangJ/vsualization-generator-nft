@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@element-plus/icons-vue": "^2.0.9",
     "@oxheadalpha/fa2-interfaces": "^7.0.0",
     "@oxheadalpha/tezos-tools": "^7.0.0",
     "@pinata/sdk": "^1.1.26",
@@ -20,6 +21,7 @@
     "bignumber.js": "^9.1.0",
     "buffer": "^6.0.3",
     "element-plus": "^2.2.16",
+    "pinia": "^2.0.22",
     "util": "^0.12.4",
     "vite-compatible-readable-stream": "^3.6.1",
     "vue": "^3.2.37",

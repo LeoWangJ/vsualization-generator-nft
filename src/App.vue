@@ -1,15 +1,16 @@
 <script setup lang="ts">
 import { onMounted } from 'vue'
-import { connect, getSigner } from './utils/wallet'
+import { useWalletStore } from './store'
+import Header from './components/Header.vue'
 onMounted(async () => {
-  const wallet = await connect()
-  if (wallet) {
-    const { address, walletInstance } = await getSigner(wallet)
-  }
+  const wallet = useWalletStore()
+  await wallet.setWallet()
 })
 </script>
 
 <template>
+  <Header></Header>
   <div>
+    <router-view></router-view>
   </div>
 </template>
