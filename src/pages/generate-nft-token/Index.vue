@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import { reactive, ref } from 'vue';
-import { createNFTMeta } from '../../utils/FA2/metadata'
+import { createNFTMeta } from '@/utils/FA2/metadata'
 import { useLocalStorage } from '@vueuse/core'
-import { pinFile } from '../../utils/FA2/ipfs'
-import { Token } from '../../utils/FA2/type';
+import { pinFile } from '@/utils/FA2/ipfs'
+import { Token } from '@/utils/FA2/type';
   const hash = ref('')
   const error = ref('')
   const isSetMetadata = ref(true)

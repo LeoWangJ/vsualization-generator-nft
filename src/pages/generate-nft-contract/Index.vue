@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { createCollection } from '../../utils/FA2/contracts'
-import { reactive, ref, toRaw } from 'vue';
-import { useWalletStore } from '../../store';
-import { createCollectionMeta } from '../../utils/FA2/metadata'
+import { createCollection } from '@/utils/FA2/contracts'
+import { reactive, ref, toRaw } from 'vue'
+import { useWalletStore } from '@/store'
+import { createCollectionMeta } from '@/utils/FA2/metadata'
 import { TezosToolkit } from '@taquito/taquito'
 import { useLocalStorage } from '@vueuse/core'
 const contractAddress = ref('')

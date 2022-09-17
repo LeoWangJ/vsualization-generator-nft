@@ -9,6 +9,7 @@ import { NodeModulesPolyfillPlugin } from '@esbuild-plugins/node-modules-polyfil
 import rollupNodePolyFill from 'rollup-plugin-node-polyfills'
 
 export default defineConfig({
+  base: '/vsualization-generator-nft/',
   plugins: [
     vue(),
     AutoImport({
@@ -19,7 +20,6 @@ export default defineConfig({
     })
   ],
   define: {
-    "process.env": process.env ?? {DEBUG:true},
   },
   resolve: {
     alias: {

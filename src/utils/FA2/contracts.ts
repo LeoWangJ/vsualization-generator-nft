@@ -11,7 +11,7 @@ export const createNftStorage = (owner: string, metadata: string) => {
 }
 
 export async function createCollection(wallet: TezosToolkit, address: string, metadata: CollectionMeta): Promise<string> {
-    const { data: code } = await axios.get('src/assets/fa2_nft_asset.tz')
+    const { data: code } = await axios.get('fa2_nft_asset.tz')
     const storage = createNftStorage(address, JSON.stringify(metadata))
     try {
         const contract = await originateContract(wallet, code, storage)
