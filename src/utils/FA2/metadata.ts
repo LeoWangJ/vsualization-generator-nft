@@ -5,11 +5,11 @@ import * as fa2 from '@oxheadalpha/fa2-interfaces'
 
 
 
-export const createCollectionMeta = ({ name, description, homepage, author = '', version = '1.0.0', licenseName = 'MIT' }: CollectionMeta) => {
+export const createCollectionMeta = ({ name, description, author = '', version = '1.0.0', licenseName = 'MIT' }: CollectionMeta) => {
     const meta = {
         name,
         description,
-        homepage,
+        homepage:'https://github.com/LeoWangJ/vsualization-generator-nft',
         authors: author ? [author]: [],
         version,
         license: { name: licenseName },

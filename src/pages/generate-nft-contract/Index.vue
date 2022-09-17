@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { createCollection } from '../../utils/FA2/contracts'
-import { reactive, ref } from 'vue';
+import { reactive, ref, toRaw } from 'vue';
 import { useWalletStore } from '../../store';
 import { createCollectionMeta } from '../../utils/FA2/metadata'
 import { TezosToolkit } from '@taquito/taquito'
@@ -12,7 +12,6 @@ const isSetMetadata = ref(true)
 const metadataField = reactive({
   name:'', 
   description:'', 
-  homepage:'', 
   author:'', 
   version:'1.0.0', 
   licenseName:'MIT'
@@ -24,7 +23,7 @@ let metadata = reactive({
   homepage:'', 
   authors:[], 
   version:'1.0.0', 
-  licenseName: { name: 'MIT' },
+  licenseName:'MIT',
   interfaces: ['TZIP-016', 'TZIP-012', 'TZIP-021'],
   source: {
       tools: ['LIGO'],
@@ -39,12 +38,15 @@ const setCollectionMeta = () =>{
 
 const handleCreateCollection = async ()=>{
   const wallet = useWalletStore()
-  const address = await createCollection(wallet.$state.walletInstance as TezosToolkit,wallet.$state.address,metadata)
+  const address = await createCollection(toRaw(wallet.$state.walletInstance) as TezosToolkit,wallet.$state.address,toRaw(metadata))
   if(address.endsWith('error')){
     error.value = address
   }else{
     contractAddress.value = address
-    useLocalStorage('contractAddress',address)
+    const contractAddressLocal = useLocalStorage('contractAddress','')
+    contractAddressLocal.value = address
+    const nftCollectionLocal = useLocalStorage('nftCollection',{})
+    nftCollectionLocal.value = JSON.stringify({[address]:[]})
   }
 }
 </script>
@@ -64,9 +66,6 @@ const handleCreateCollection = async ()=>{
     <el-form-item label="Description">
       <el-input v-model="metadataField.description" />
     </el-form-item>
-    <el-form-item label="Homepage">
-      <el-input v-model="metadataField.homepage" />
-    </el-form-item>
     <el-form-item label="Author">
       <el-input v-model="metadataField.author" />
     </el-form-item>
@@ -82,8 +81,8 @@ const handleCreateCollection = async ()=>{
   </el-form>
   </template>
   <template v-else>
-    <div><el-icon><ArrowLeftBold /></el-icon>Back</div>
-    <p>Check the contract JSON that you will deploy</p>
+    <div @click="isSetMetadata = true"><el-icon><ArrowLeftBold /></el-icon>Back</div>
+    <p>Check the contract metadata that you will deploy</p>
     <pre>{{JSON.stringify(metadata, null, 2)}}</pre>
     <el-divider />
     <el-button type="primary" @click="handleCreateCollection">Deploy</el-button>

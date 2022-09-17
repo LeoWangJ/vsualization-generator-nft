@@ -4,11 +4,12 @@ import * as fa2 from '@oxheadalpha/fa2-interfaces'
 export interface CollectionMeta {
     name: string
     description: string
-    homepage: string
+    homepage?: string
     authors?: string[]
     version: string
     licenseName?: string
     author?: string
+    license?: { name: string },
     interfaces?: string[]
     source?: {
         tools: string[]
@@ -19,7 +20,7 @@ export interface CollectionMeta {
 export interface CreateNFTMeta {
     name: string
     description: string
-    tags: string[]
+    tags?: string[]
     minterAddress: string
     artifactUri: string
 }

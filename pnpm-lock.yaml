@@ -2,6 +2,8 @@ lockfileVersion: 5.4
 
 specifiers:
   '@element-plus/icons-vue': ^2.0.9
+  '@esbuild-plugins/node-globals-polyfill': ^0.1.1
+  '@esbuild-plugins/node-modules-polyfill': ^0.1.4
   '@oxheadalpha/fa2-interfaces': ^7.0.0
   '@oxheadalpha/tezos-tools': ^7.0.0
   '@pinata/sdk': ^1.1.26
@@ -16,6 +18,7 @@ specifiers:
   buffer: ^6.0.3
   element-plus: ^2.2.16
   pinia: ^2.0.22
+  rollup-plugin-node-polyfills: ^0.2.1
   typescript: ^4.6.4
   unplugin-auto-import: ^0.11.2
   unplugin-vue-components: ^0.22.7
@@ -28,6 +31,8 @@ specifiers:
 
 dependencies:
   '@element-plus/icons-vue': 2.0.9_vue@3.2.39
+  '@esbuild-plugins/node-globals-polyfill': 0.1.1
+  '@esbuild-plugins/node-modules-polyfill': 0.1.4
   '@oxheadalpha/fa2-interfaces': 7.0.0
   '@oxheadalpha/tezos-tools': 7.0.0
   '@pinata/sdk': 1.1.26
@@ -41,6 +46,7 @@ dependencies:
   buffer: 6.0.3
   element-plus: 2.2.16_vue@3.2.39
   pinia: 2.0.22_arz4dztosvwy2ghjrlh2wdhejm
+  rollup-plugin-node-polyfills: 0.2.1
   util: 0.12.4
   vite-compatible-readable-stream: 3.6.1
   vue: 3.2.39
@@ -94,6 +100,21 @@ packages:
       vue: ^3.2.0
     dependencies:
       vue: 3.2.39
+    dev: false
+
+  /@esbuild-plugins/node-globals-polyfill/0.1.1:
+    resolution: {integrity: sha512-MR0oAA+mlnJWrt1RQVQ+4VYuRJW/P2YmRTv1AsplObyvuBMnPHiizUF95HHYiSsMGLhyGtWufaq2XQg6+iurBg==}
+    peerDependencies:
+      esbuild: '*'
+    dev: false
+
+  /@esbuild-plugins/node-modules-polyfill/0.1.4:
+    resolution: {integrity: sha512-uZbcXi0zbmKC/050p3gJnne5Qdzw8vkXIv+c2BW0Lsc1ji1SkrxbKPUy5Efr0blbTu1SL8w4eyfpnSdPg3G0Qg==}
+    peerDependencies:
+      esbuild: '*'
+    dependencies:
+      escape-string-regexp: 4.0.0
+      rollup-plugin-node-polyfills: 0.2.1
     dev: false
 
   /@esbuild/linux-loong64/0.15.7:
@@ -1210,10 +1231,19 @@ packages:
     resolution: {integrity: sha512-NiSupZ4OeuGwr68lGIeym/ksIZMJodUGOSCZ/FSnTxcrekbvqrgdUxlJOMpijaKZVjAJrWrGs/6Jy8OMuyj9ow==}
     dev: false
 
+  /escape-string-regexp/4.0.0:
+    resolution: {integrity: sha512-TtpcNJ3XAzx3Gq8sWRzJaVajRs0uVxA2YAkdb1jm2YkPz4G6egUFAyA3n5vtEIZefPk5Wa4UXbKuS5fKkJWdgA==}
+    engines: {node: '>=10'}
+    dev: false
+
   /escape-string-regexp/5.0.0:
     resolution: {integrity: sha512-/veY75JbMK4j1yjvuUxuVsiS/hr/4iHs9FTT6cgTexxdE0Ly/glccBAkloH/DofkjRbZU3bnoj38mOmhkZ0lHw==}
     engines: {node: '>=12'}
     dev: true
+
+  /estree-walker/0.6.1:
+    resolution: {integrity: sha512-SqmZANLWS0mnatqbSfRP5g8OXZC12Fgg1IwNtLsyHDzJizORW4khDfjPqJZsemPWBB2uqykUah5YpQ6epsqC/w==}
+    dev: false
 
   /estree-walker/2.0.2:
     resolution: {integrity: sha512-Rfkk/Mp/DL7JVje3u18FxFujQlTNR2q6QfMSMB7AvCBx91NGj/ba3kCfza0f6dVDbw7YlRf/nDrn7pQrCCyQ/w==}
@@ -1969,6 +1999,27 @@ packages:
     dependencies:
       hash-base: 3.1.0
       inherits: 2.0.4
+    dev: false
+
+  /rollup-plugin-inject/3.0.2:
+    resolution: {integrity: sha512-ptg9PQwzs3orn4jkgXJ74bfs5vYz1NCZlSQMBUA0wKcGp5i5pA1AO3fOUEte8enhGUC+iapTCzEWw2jEFFUO/w==}
+    deprecated: This package has been deprecated and is no longer maintained. Please use @rollup/plugin-inject.
+    dependencies:
+      estree-walker: 0.6.1
+      magic-string: 0.25.9
+      rollup-pluginutils: 2.8.2
+    dev: false
+
+  /rollup-plugin-node-polyfills/0.2.1:
+    resolution: {integrity: sha512-4kCrKPTJ6sK4/gLL/U5QzVT8cxJcofO0OU74tnB19F40cmuAKSzH5/siithxlofFEjwvw1YAhPmbvGNA6jEroA==}
+    dependencies:
+      rollup-plugin-inject: 3.0.2
+    dev: false
+
+  /rollup-pluginutils/2.8.2:
+    resolution: {integrity: sha512-EEp9NhnUkwY8aif6bxgovPHMoMoNr2FulJziTndpt5H9RdwC47GSGuII9XxpSdzVGM0GWrNPHV6ie1LTNJPaLQ==}
+    dependencies:
+      estree-walker: 0.6.1
     dev: false
 
   /rollup/2.78.1:
