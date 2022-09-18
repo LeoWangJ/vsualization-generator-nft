@@ -64,6 +64,7 @@ export const showBalances = async ({ tz, ownerAddress, nftAddress, tokens }: Sho
     return parseBalances(balances)
 }
 
+// only show owner have
 const parseBalances = (balances: fa2.BalanceResponse[]): Balance[] => {
     return balances.map(balance => {
         return {
@@ -71,5 +72,5 @@ const parseBalances = (balances: fa2.BalanceResponse[]): Balance[] => {
             tokenId: +balance.request.token_id.toString(),
             balance: +balance.balance.toString()
         }
-    })
+    }).filter(nft => nft.balance > 0)
 }

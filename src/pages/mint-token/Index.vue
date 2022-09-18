@@ -15,7 +15,7 @@ const handleMint = async (collection,address) =>{
   try{
     await mintNfts({
       wallet:toRaw(wallet.$state.walletInstance), 
-      address, 
+      address:toRaw(wallet.$state.address), 
       collectionAddress:address, 
       tokens:[{tokenId:collection.tokenId,metadataUri:collection.metadataUri}]
     })

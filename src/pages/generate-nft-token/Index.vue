@@ -54,9 +54,9 @@ import { pinFile } from '@/utils/FA2/ipfs'
     //@ts-ignore
     if(nftCollection.value[contractField.value]  && nftCollection.value[contractField.value].length !== 0){
       //@ts-ignore
-      nftCollection.value = {...nftCollection.value, [contractField.value]:[...nftCollection.value[contractField.value],{tokenId:nftCollection.value[contractField.value].length +1,metadataUri:tx,image: metadataField.artifactUri.replace("ipfs://",""),minted:false}]} 
+      nftCollection.value = {...nftCollection.value, [contractField.value]:[...nftCollection.value[contractField.value],{tokenId:nftCollection.value[contractField.value].length +1,metadataUri:`ipfs://${tx}`,image: metadataField.artifactUri.replace("ipfs://",""),minted:false}]} 
     }else{
-      nftCollection.value = {...nftCollection.value,[contractField.value]:[{tokenId:1,metadataUri:tx,image: metadataField.artifactUri.replace("ipfs://",""),minted:false}]}
+      nftCollection.value = {...nftCollection.value,[contractField.value]:[{tokenId:1,metadataUri:`ipfs://${tx}`,image: metadataField.artifactUri.replace("ipfs://",""),minted:false}]}
     }
   }
   </script>

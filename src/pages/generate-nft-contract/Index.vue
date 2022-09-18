@@ -86,7 +86,7 @@ const handleCreateCollection = async ()=>{
     <pre>{{JSON.stringify(metadata, null, 2)}}</pre>
     <el-divider />
     <el-button type="primary" @click="handleCreateCollection">Deploy</el-button>
-    <p v-if="contractAddress">Check Contract address: <a :href="`https://better-call.dev/ghostnet/${contractAddress}/operations`" target="_blank"></a></p>
+    <p v-if="contractAddress">Check Contract address: <a :href="`https://better-call.dev/ghostnet/${contractAddress}/operations`" target="_blank">{{contractAddress}}</a></p>
     <p v-if="error">{{error}}</p>
   </template>
 </template>

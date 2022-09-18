@@ -1,40 +1,38 @@
 <script setup lang="ts">
 import { useLocalStorage } from '@vueuse/core'
-import {  toRaw } from 'vue';
+import { onMounted,toRaw,reactive } from 'vue'
 import {IPFS_URL_PREFIX} from '@/utils/constants'
-import { mintNfts } from '@/utils/FA2/contracts'
+import { showBalances } from '@/utils/FA2/contracts'
 import { useWalletStore } from '@/store'
-import 'element-plus/es/components/message/style/css'
-import { ElMessage } from 'element-plus'
+import {showNFTMetadata} from '@/utils/FA2/metadata'
 
 const nftCollectionLocal = useLocalStorage('nftCollection',{})
+const ownerToken = reactive([])
 
-
-const handleMint = async (collection,address) =>{
+onMounted(async()=>{
+  await showBalance()
+})
+const showBalance = async () => {
   const wallet = useWalletStore()
-  try{
-    await mintNfts({
-      wallet:toRaw(wallet.$state.walletInstance), 
-      address, 
-      collectionAddress:address, 
-      tokens:[{tokenId:collection.tokenId,metadataUri:collection.metadataUri}]
-    })
-    ElMessage({ message: 'success!',type: 'success', })
-    nftCollectionLocal.value[address] = nftCollectionLocal.value[address].map(nft => {
-      if(nft.tokenId === collection.tokenId) return {...nft,minted:true}
-      return nft
-    })
-  }catch(e){
-    ElMessage({ message: 'error!',type: 'error', })
-
+  for(const nftAddress in nftCollectionLocal.value){
+    const nftCollection = nftCollectionLocal.value[nftAddress]
+    const tokenIds = nftCollection.map(nft => `${nft.tokenId}`)
+    const balances = await showBalances({ 
+      tz: toRaw(wallet.$state.walletInstance), 
+      ownerAddress:toRaw(wallet.$state.address), 
+      nftAddress:nftAddress, 
+      tokens:tokenIds })
+      console.log(balances)
+      console.log(nftAddress)
+      const list = await showNFTMetadata(toRaw(wallet.$state.walletInstance),nftAddress,['1'])
+      console.log(list)
+   // TODO : 顯示 balance > 1 , showNFTMetadata, 取得token image, 顯示 tokenId, nftAddress, metadata ipfs 
   }
-  
 }
-
 </script>
 
 <template>
-  <el-row 
+  <!-- <el-row 
       v-for="(nftCollection, address) in nftCollectionLocal"
       :key="address">
       <div>{{address}}</div>
@@ -59,5 +57,5 @@ const handleMint = async (collection,address) =>{
           </el-card>
         </el-col>
       </el-col>
-  </el-row>
+  </el-row> -->
 </template>
