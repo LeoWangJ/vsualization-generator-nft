@@ -3,7 +3,6 @@ import { reactive, ref } from 'vue';
 import { createNFTMeta } from '@/utils/FA2/metadata'
 import { useLocalStorage } from '@vueuse/core'
 import { pinFile } from '@/utils/FA2/ipfs'
-import { Token } from '@/utils/FA2/type';
   const hash = ref('')
   const error = ref('')
   const isSetMetadata = ref(true)
@@ -15,7 +14,6 @@ import { Token } from '@/utils/FA2/type';
     artifactUri:''
   })
   const contractField = ref('')
-  const nftCollection = useLocalStorage('nftCollection',{})
   const contractAddress = useLocalStorage('contractAddress','')
   let metadata = reactive({
     decimals: 0,
@@ -42,7 +40,7 @@ import { Token } from '@/utils/FA2/type';
     metadata = Object.assign(metadata,createNFTMeta(metadataField))
     isSetMetadata.value = false
   }
-  
+
   const handlePinTokenMetadata = async ()=>{
     const tx = await pinFile({
       apiKey:pinataField.apiKey,
@@ -53,11 +51,12 @@ import { Token } from '@/utils/FA2/type';
     hash.value = tx
     const nftCollection = useLocalStorage('nftCollection',{})
     
-    if(contractField.value in nftCollection.value){
+    //@ts-ignore
+    if(nftCollection.value[contractField.value]  && nftCollection.value[contractField.value].length !== 0){
       //@ts-ignore
-      nftCollection.value = {...nftCollection.value, [contractField.value]:nftCollection.value[contractField.value].push({tokenId:nftCollection.value[contractField.value].length,metadataUri:tx})} 
+      nftCollection.value = {...nftCollection.value, [contractField.value]:[...nftCollection.value[contractField.value],{tokenId:nftCollection.value[contractField.value].length +1,metadataUri:tx,image: metadataField.artifactUri.replace("ipfs://",""),minted:false}]} 
     }else{
-      nftCollection.value = {...nftCollection.value,[contractField.value]:[{tokenId:1,metadataUri:tx}]}
+      nftCollection.value = {...nftCollection.value,[contractField.value]:[{tokenId:1,metadataUri:tx,image: metadataField.artifactUri.replace("ipfs://",""),minted:false}]}
     }
   }
   </script>

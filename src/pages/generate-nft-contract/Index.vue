@@ -46,7 +46,7 @@ const handleCreateCollection = async ()=>{
     const contractAddressLocal = useLocalStorage('contractAddress','')
     contractAddressLocal.value = address
     const nftCollectionLocal = useLocalStorage('nftCollection',{})
-    nftCollectionLocal.value = JSON.stringify({[address]:[]})
+    nftCollectionLocal.value = {...nftCollectionLocal.value,[address]:[]}
   }
 }
 </script>
@@ -66,7 +66,7 @@ const handleCreateCollection = async ()=>{
     <el-form-item label="Description">
       <el-input v-model="metadataField.description" />
     </el-form-item>
-    <el-form-item label="Author">
+    <el-form-item label="Author" placeholder="Print Name <contact-url-or-email>">
       <el-input v-model="metadataField.author" />
     </el-form-item>
     <el-form-item label="Version">
@@ -86,7 +86,7 @@ const handleCreateCollection = async ()=>{
     <pre>{{JSON.stringify(metadata, null, 2)}}</pre>
     <el-divider />
     <el-button type="primary" @click="handleCreateCollection">Deploy</el-button>
-    <p v-if="contractAddress">Contract address: {{contractAddress}} </p>
+    <p v-if="contractAddress">Check Contract address: <a :href="`https://better-call.dev/ghostnet/${contractAddress}/operations`" target="_blank"></a></p>
     <p v-if="error">{{error}}</p>
   </template>
 </template>

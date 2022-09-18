@@ -16,7 +16,8 @@ const menus = [
   { router: 'home',name:'HOME'},
   { router: 'generate-nft-contract',name:'GENERATE NFT CONTRACT'},
   { router: 'generate-nft-token',name:'GENERATE NFT TOKEN'},
-  { router: 'show-nft-token',name:'SHOW MINT TOKEN'},
+  { router: 'mint-token',name:'MINT TOKEN'},
+  { router: 'show-token',name:'SHOW TOKEN'},
 ]
 </script>
 

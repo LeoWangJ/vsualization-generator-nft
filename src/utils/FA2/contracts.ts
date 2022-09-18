@@ -23,10 +23,11 @@ export async function createCollection(wallet: TezosToolkit, address: string, me
 }
 
 
-export const mintNfts = async ({ wallet, address, collectionAddress, tokens }: MintNFT): Promise<void> => {
+export const mintNfts = async ({ wallet, address, collectionAddress, tokens }: MintNFT) => {
     const nftContract = (await fa2.tezosWalletApi(wallet).at(collectionAddress)).asNft().withMint()
     const parsedTokens = tokens.map((token) => parseTokens(token))
-    await fa2.runMethod(nftContract.mint([{ owner: address, tokens: parsedTokens }]))
+    const tx = await fa2.runMethod(nftContract.mint([{ owner: address, tokens: parsedTokens }]))
+    return tx
 }
 
 const parseTokens = (token: Token): fa2.TokenMetadataInternal => {
