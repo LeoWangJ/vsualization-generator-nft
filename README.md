@@ -1,16 +1,57 @@
-# Vue 3 + TypeScript + Vite
+# Project Name
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+vsualization-generator-nft
 
-## Recommended IDE Setup
+# Project description
+ This website uses [TZNFT CLI](https://github.com/oxheadalpha/nft-tutorial/tree/master/packages/tznft) to develop visualized production of NFT pages, which is convenient for users who do not write programs to generate the NFT they want more conveniently.
 
-- [VS Code](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar)
+ - This website provides:
+    1. generating NFT contracts
+    2. generating NFT token
+    3. mint NFT token
+    4. show your mint NFT token
 
-## Type Support For `.vue` Imports in TS
+Currently we only use Temple Wallet and Ghostnet Testnet.
 
-Since TypeScript cannot handle type information for `.vue` imports, they are shimmed to be a generic Vue component type by default. In most cases this is fine if you don't really care about component prop types outside of templates. However, if you wish to get actual prop types in `.vue` imports (for example to get props validation when using manual `h(...)` calls), you can enable Volar's Take Over mode by following these steps:
+The website will continue to optimize ..., Please wait for our good news
+    
+# Project run
+```
+pnpm install 
+pnpm dev
+```
 
-1. Run `Extensions: Show Built-in Extensions` from VS Code's command palette, look for `TypeScript and JavaScript Language Features`, then right click and select `Disable (Workspace)`. By default, Take Over mode will enable itself if the default TypeScript extension is disabled.
-2. Reload the VS Code window by running `Developer: Reload Window` from the command palette.
+# Project requirements
+ - Node v16.14.0
+# Working App
 
-You can learn more about Take Over mode [here](https://github.com/johnsoncodehk/volar/discussions/471).
+Website - [https://leowangj.github.io/vsualization-generator-nft](https://leowangj.github.io/vsualization-generator-nft)
+
+# Demo by Picture 
+- Input information for deploy nft contract 
+
+![](./public/deploy_field.png)
+
+- Show nft contract metadata and deploy 
+
+![](./public/deploy_json.png)
+
+- Input information for nft token
+
+![](./public/generate_nft_token.png)
+
+- Show your deployment nft token & can mint it
+
+![](./public/mint_token.png)
+
+- Show you have nft token
+
+![](./public/show_token.png)
+
+# Team
+[leowang](https://github.com/LeoWangJ)
+# Contact Info
+
+- Discord ID - leoJ#5012
+- Email ID - [rfv7855659@gmail.com](mailto:rfv7855659@gmail.com)
+- Gitcoin - [leowangj](https://gitcoin.co/leowangj)
