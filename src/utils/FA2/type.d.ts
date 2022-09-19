@@ -71,3 +71,15 @@ export interface ShowBalance {
     nftAddress: string
     tokens: string[]
 }
+
+
+export interface NftCollection{
+    tokenId:number
+    image:string
+    metadataUri:string
+    minted: boolean
+  }
+  
+export interface NftCollectionLocal {
+    [key?:string]:NftCollection[]
+  }

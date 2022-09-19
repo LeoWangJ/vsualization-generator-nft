@@ -5,8 +5,9 @@ import {IPFS_URL_PREFIX} from '@/utils/constants'
 import { showBalances } from '@/utils/FA2/contracts'
 import { useWalletStore } from '@/store'
 import {showNFTMetadata} from '@/utils/FA2/metadata'
+import { NftCollectionLocal } from '@/utils/FA2/type'
 
-const nftCollectionLocal = useLocalStorage('nftCollection',{})
+const nftCollectionLocal = useLocalStorage<NftCollectionLocal>('nftCollection',{})
 </script>
 
 <template>

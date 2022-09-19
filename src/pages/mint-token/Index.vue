@@ -1,20 +1,21 @@
 <script setup lang="ts">
 import { useLocalStorage } from '@vueuse/core'
-import {  toRaw } from 'vue';
+import { toRaw } from 'vue'
 import {IPFS_URL_PREFIX} from '@/utils/constants'
 import { mintNfts } from '@/utils/FA2/contracts'
 import { useWalletStore } from '@/store'
 import 'element-plus/es/components/message/style/css'
 import { ElMessage } from 'element-plus'
+import { TezosToolkit } from '@taquito/taquito'
+import { NftCollection, NftCollectionLocal } from '@/utils/FA2/type'
 
-const nftCollectionLocal = useLocalStorage('nftCollection',{})
+const nftCollectionLocal = useLocalStorage<NftCollectionLocal>('nftCollection', {})
 
-
-const handleMint = async (collection,address) =>{
+const handleMint = async (collection:NftCollection,address:string) =>{
   const wallet = useWalletStore()
   try{
     await mintNfts({
-      wallet:toRaw(wallet.$state.walletInstance), 
+      wallet:toRaw(wallet.$state.walletInstance) as TezosToolkit, 
       address:toRaw(wallet.$state.address), 
       collectionAddress:address, 
       tokens:[{tokenId:collection.tokenId,metadataUri:collection.metadataUri}]
@@ -53,7 +54,7 @@ const handleMint = async (collection,address) =>{
               <span>TokenId: {{collection.tokenId}}</span>
               <div>Metadata IPFS: {{collection.metadataUri}}</div>
               <div class="bottom">
-                <el-button type="primary" @click="handleMint(collection,address)" :disabled="collection.minted">MINT</el-button>
+                <el-button type="primary" @click="handleMint(collection,address as string)" :disabled="collection.minted">MINT</el-button>
               </div>
             </div>
           </el-card>
