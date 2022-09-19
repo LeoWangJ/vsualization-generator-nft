@@ -37,7 +37,7 @@ const handleMint = async (collection,address) =>{
   <el-row 
       v-for="(nftCollection, address) in nftCollectionLocal"
       :key="address">
-      <div>Contract: {{address}}</div>
+      <div  style="margin: 10px;">Contract: {{address}}</div>
       <el-col style="display:flex">
         <el-col
           v-for="(collection) in nftCollection"
