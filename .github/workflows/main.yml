@@ -44,7 +44,7 @@ jobs:
         run: pnpm run build
 
       - name: Deploy to EC2
-        uses: easingthemes/ssh-deploy@v2.0.7
+        uses: easingthemes/ssh-deploy@v4.1.8
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_TOKEN }}
           SSH_USER: ${{ secrets.SERVER_USER }} 
