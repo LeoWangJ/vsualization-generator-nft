@@ -1,0 +1,36 @@
+name: Build and Deploy
+on:
+  push:
+    tags:
+      - /^v\d+\.\d+\.\d+(-[\w-]+)?$/
+jobs:
+  CD:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      
+      - name: Use Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: "16.x"
+          cache: 'pnpm'
+          registry-url: 'https://registry.npmjs.org/'
+      
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Building
+        run: pnpm run build
+          
+      - name: Deploy to EC2
+        uses: easingthemes/ssh-deploy@v2.0.7
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SERVER_TOKEN }}
+          SSH_USER: ${{ secrets.SERVER_USER }} 
+          SOURCE: "dist/"
+          TARGET: "/data/www"
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
+          REMOTE_PATH: /path/to/deploy/
+          ARGS: --delete
