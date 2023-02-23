@@ -51,6 +51,7 @@ jobs:
           SOURCE: "dist nginx/default.conf Dockerfile"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           TARGET: "/var/www"
+          EXCLUDE: "/node_modules/"
           ARGS: "--delete"
           SCRIPT_AFTER: |
             cd var/www
