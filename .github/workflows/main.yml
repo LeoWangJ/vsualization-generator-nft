@@ -50,7 +50,6 @@ jobs:
           REMOTE_USER: ${{ secrets.SERVER_USER }} 
           SOURCE: "dist nginx/default.conf Dockerfile"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           TARGET: "/var/www"
           ARGS: "--delete"
           SCRIPT_BEFORE: ls
