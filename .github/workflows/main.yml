@@ -47,9 +47,10 @@ jobs:
         uses: easingthemes/ssh-deploy@v4.1.8
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_TOKEN }}
-          SSH_USER: ${{ secrets.SERVER_USER }} 
+          REMOTE_USER: ${{ secrets.SERVER_USER }} 
           SOURCE: "dist nginx/default.conf Dockerfile"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+          REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           ARGS: "-o StrictHostKeyChecking=no --delete"
           SCRIPT_AFTER: |
             docker stop my-container || true
