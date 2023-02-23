@@ -48,18 +48,11 @@ jobs:
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SERVER_TOKEN }}
           SSH_USER: ${{ secrets.SERVER_USER }} 
-          SOURCE: "dist/"
-          TARGET: "/data/www"
-          SOURCE_2: "nginx/default.conf"
-          TARGET_2: "/etc/nginx/conf.d/default.conf"
-          SOURCE_3: "Dockerfile"
-          TARGET_3: "Dockerfile"
+          SOURCE: "dist nginx/default.conf Dockerfile"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
-          ARGS: --delete
-        with:
-          args: -o "StrictHostKeyChecking=no"
-          script: |
+          ARGS: -o "StrictHostKeyChecking=no" --delete
+          SCRIPT_AFTER: |
             docker stop my-container || true
             docker rm my-container || true
             docker pull generator-nft:latest
