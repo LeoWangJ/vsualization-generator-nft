@@ -52,8 +52,8 @@ jobs:
           TARGET: "/data/www"
           SOURCE_2: "nginx/default.conf"
           TARGET_2: "/etc/nginx/conf.d/default.conf"
-           SOURCE_2: "Dockerfile"
-          TARGET_2: "Dockerfile"
+          SOURCE_3: "Dockerfile"
+          TARGET_3: "Dockerfile"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           REMOTE_PORT: ${{ secrets.REMOTE_PORT }}
           ARGS: --delete
