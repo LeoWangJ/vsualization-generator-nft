@@ -52,7 +52,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
           TARGET: "/var/www"
           ARGS: "--delete"
-          SCRIPT_BEFORE: ls
           SCRIPT_AFTER: |
             cd var/www
             docker stop my-container || true
