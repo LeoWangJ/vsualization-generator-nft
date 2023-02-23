@@ -2,7 +2,7 @@ name: Build and Deploy
 on:
   push:
     tags:
-      - /^v\d+\.\d+\.\d+(-[\w-]+)?$/
+      - '*'
 jobs:
   CD:
     runs-on: ubuntu-latest
