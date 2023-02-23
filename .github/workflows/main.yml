@@ -50,7 +50,7 @@ jobs:
           SSH_USER: ${{ secrets.SERVER_USER }} 
           SOURCE: "dist nginx/default.conf Dockerfile"
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
-          ARGS: -o "StrictHostKeyChecking=no" --delete
+          ARGS: "-o "StrictHostKeyChecking=no" --delete"
           SCRIPT_AFTER: |
             docker stop my-container || true
             docker rm my-container || true
