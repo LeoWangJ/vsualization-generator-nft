@@ -1,10 +1,10 @@
 FROM nginx:stable-alpine as deploy-stage
 
-RUN ls /var/www/
+RUN ls 
 
-RUN chmod -R 777 /var/www/
+RUN chmod -R 777 .
 
-COPY dist /var/www/app/
+COPY dist app/
 
 COPY default.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
