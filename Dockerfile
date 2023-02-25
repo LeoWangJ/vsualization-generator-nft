@@ -2,19 +2,20 @@ FROM nginx:stable-alpine as deploy-stage
 
 WORKDIR /var
 
-RUN ls 
-
 WORKDIR /var/www
 
-RUN ls 
+RUN ls /var/www
 
 RUN chmod -R 777 .
 
 COPY dist app
 
-RUN ls  /var/www/app
+RUN ls /var/www/app
 
 COPY default.conf /etc/nginx/conf.d/default.conf
+
+WORKDIR /var/www/app
+
 EXPOSE 80
 
 CMD ["nginx","-g","daemon off;"]
