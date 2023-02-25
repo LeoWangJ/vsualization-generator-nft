@@ -13,6 +13,7 @@ COPY dist app
 RUN ls /var/www/app
 
 COPY default.conf /etc/nginx/conf.d/default.conf
+RUN ls /etc/nginx/conf.d
 
 WORKDIR /var/www/app
 
