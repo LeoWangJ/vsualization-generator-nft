@@ -65,9 +65,7 @@ jobs:
           TARGET: "/var/www"
           EXCLUDE: "/node_modules/"
           ARGS: "--delete"
-          SCRIPT_BEFORE: |
-            ls
-            curl https://www.google.com
+          SCRIPT_BEFORE:  ls
           SCRIPT_AFTER: |
             cd /var/www
             docker stop my-container || true
