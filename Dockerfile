@@ -1,9 +1,5 @@
 FROM nginx:stable-alpine as deploy-stage
 
-WORKDIR /var
-
-RUN ls 
-
 WORKDIR /var/www
 
 RUN ls 
