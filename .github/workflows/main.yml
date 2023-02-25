@@ -43,6 +43,17 @@ jobs:
       - name: Building
         run: pnpm run build
 
+      - name: Get Github action IP
+        id: ip
+        uses: haythem/public-ip@v1.2
+
+      - name: Add Github Actions IP to Security group
+        run: |
+          aws ec2 authorize-security-group-ingress --group-name ${{ env.AWS_SG_NAME }} --protocol tcp --port 22 --cidr ${{ steps.ip.outputs.ipv4 }}/32    
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.ACCESS_KEY }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.ACCESS_PRIVATE_KEY }}
+
       - name: Deploy to EC2
         uses: easingthemes/ssh-deploy@v4.1.8
         env:
