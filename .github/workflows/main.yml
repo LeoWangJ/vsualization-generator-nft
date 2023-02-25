@@ -70,7 +70,7 @@ jobs:
             cd /var/www
             docker stop my-container || true
             docker rm my-container || true
-            docker pull my-container:latest
+            docker build -t my-container .
             docker run -d --name my-container -p 80:80 my-container:latest
 
       - name: Remove Github Actions IP from security group
